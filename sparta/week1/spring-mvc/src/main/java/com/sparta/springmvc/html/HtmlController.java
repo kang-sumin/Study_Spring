@@ -10,4 +10,10 @@ public class HtmlController {
     public String hello(){
         return "hello.html";
     }
+
+    //thymeleaf 엔진 사용했을때 정적 페이지 반환 방법
+    @GetMapping("/html/redirect")
+    public String htmlStatic(){
+        return "redirect:/hello.html";
+    }
 }
