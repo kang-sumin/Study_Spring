@@ -4,10 +4,11 @@ import com.sparta.memo.dto.MemoRequestDto;
 import com.sparta.memo.dto.MemoResponseDto;
 import com.sparta.memo.entity.Memo;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -15,6 +16,11 @@ import java.util.Map;
 public class MemoController {
 
     private final Map<Long, Memo> memoList = new HashMap<>();
+    private final ResourceUrlProvider mvcResourceUrlProvider;
+
+    public MemoController(ResourceUrlProvider mvcResourceUrlProvider) {
+        this.mvcResourceUrlProvider = mvcResourceUrlProvider;
+    }
 
     @PostMapping("/memos")
     public MemoResponseDto createMemo(@RequestBody MemoRequestDto requestDto) {
@@ -23,6 +29,7 @@ public class MemoController {
 
         // Memo Max ID Check : 고유 ID를 주기 위해 자동 증가
         Long maxId = memoList.size() > 0 ? Collections.max(memoList.keySet()) + 1 : 1;
+
         memo.setId(maxId);
 
         // DB 저장
@@ -32,6 +39,14 @@ public class MemoController {
         MemoResponseDto memoResponseDto = new MemoResponseDto(memo);
 
         return memoResponseDto;
+    }
+
+    @GetMapping("/memos")
+    public List<MemoResponseDto> getMemos() {
+        //Map -> List
+        List<MemoResponseDto> responseList = memoList.values().stream().map(MemoResponseDto::new).toList();
+
+        return responseList;
     }
 
 }
