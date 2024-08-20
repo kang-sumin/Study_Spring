@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +16,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+// Bean으로 등록
+// @Component
+@Repository
 public class MemoRepository {
-
+    // Bean으로는 memoRepository로 등록됨
     private final JdbcTemplate jdbcTemplate;
 
+    // 생성자가 1개여서 @Autowired 생략 가능
     public MemoRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate=jdbcTemplate;
     }
