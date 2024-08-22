@@ -97,7 +97,7 @@ public class MemoRepository {
     @Transactional
     public Memo createMemo(EntityManager em) {
         Memo memo = em.find(Memo.class, 1);
-        memo.setUsername("Robbie");
+        memo.setUsername("Robbert");
         memo.setContents("@Transactional 전파 테스트 중!");
 
         System.out.println("createMemo 메서드 종료");
