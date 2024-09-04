@@ -26,6 +26,12 @@ public class ItemController {
         return itemService.getCallList();
     }
 
+    /**
+     *
+     * @param @PathVariable query
+     * @param requestDto
+     * @return
+     */
     @PostMapping("/post-call/{query}")
     public Item postCall(@PathVariable String query, @RequestBody UserRequestDto requestDto) {
         return itemService.postCall(query, requestDto);
