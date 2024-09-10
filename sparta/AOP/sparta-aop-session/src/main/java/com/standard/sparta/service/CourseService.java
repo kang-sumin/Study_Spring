@@ -46,19 +46,31 @@ public class CourseService {
      */
     public CourseListResponseDto getCourseList() {
 
-        // 조회: 수업 엔티티 목록 조회
-        log.info("::: 수업 목록 조회 :::");
-        List<Course> foundCourseList = courseRepository.findAll(); // 조회 쿼리 1 발생
+        // 측정 시작
+        long startTime = System.currentTimeMillis();
 
-        // DTO 변환: 수업 엔티티 -> CourseDto
-        log.info("::: DTO 변환 - Course -> CourseDto :::");
-        List<CourseDto> courseDtoList = foundCourseList.stream().map(course -> new CourseDto(
-                course.getId(),
-                course.getName(),
-                course.getMembers().size()
-        )).toList();
+        try{
+            // 조회: 수업 엔티티 목록 조회
+            log.info("::: 수업 목록 조회 :::");
+            List<Course> foundCourseList = courseRepository.findAll(); // 조회 쿼리 1 발생
 
-        // 응답 반환
-        return new CourseListResponseDto(courseDtoList);
+            // DTO 변환: 수업 엔티티 -> CourseDto
+            log.info("::: DTO 변환 - Course -> CourseDto :::");
+            List<CourseDto> courseDtoList = foundCourseList.stream().map(course -> new CourseDto(
+                    course.getId(),
+                    course.getName(),
+                    course.getMembers().size()
+            )).toList();
+
+            // 응답 반환
+            return new CourseListResponseDto(courseDtoList);
+        }finally{
+            // 측정 완료
+            long endTime = System.currentTimeMillis();
+            long excutionTime = endTime - startTime;
+            log.info("::: ExcutionTime: {}ms", excutionTime);
+        }
+
+
     }
 }
