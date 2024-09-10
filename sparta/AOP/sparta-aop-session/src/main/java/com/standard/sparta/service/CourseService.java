@@ -1,5 +1,6 @@
 package com.standard.sparta.service;
 
+import com.standard.sparta.annotation.TrackTime;
 import com.standard.sparta.domain.Course;
 import com.standard.sparta.dto.course.CourseCreateRequestDto;
 import com.standard.sparta.dto.course.CourseCreateResponseDto;
@@ -44,10 +45,11 @@ public class CourseService {
     /**
      * 수업 목록 조회 서비스
      */
+    @TrackTime
     public CourseListResponseDto getCourseList() {
 
-        // 측정 시작
-        long startTime = System.currentTimeMillis();
+//        // 측정 시작
+//        long startTime = System.currentTimeMillis();
 
         try{
             // 조회: 수업 엔티티 목록 조회
@@ -65,10 +67,10 @@ public class CourseService {
             // 응답 반환
             return new CourseListResponseDto(courseDtoList);
         }finally{
-            // 측정 완료
-            long endTime = System.currentTimeMillis();
-            long excutionTime = endTime - startTime;
-            log.info("::: ExcutionTime: {}ms", excutionTime);
+//            // 측정 완료
+//            long endTime = System.currentTimeMillis();
+//            long excutionTime = endTime - startTime;
+//            log.info("::: ExcutionTime: {}ms", excutionTime);
         }
 
 

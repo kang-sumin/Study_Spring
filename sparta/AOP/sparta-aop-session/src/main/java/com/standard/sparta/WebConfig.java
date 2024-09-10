@@ -1,5 +1,6 @@
 package com.standard.sparta;
 
+import com.standard.sparta.aop.AspectPractice;
 import com.standard.sparta.filter.CustomFilter;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
@@ -17,5 +18,14 @@ public class WebConfig {
         filterFilterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);
         filterFilterRegistrationBean.addUrlPatterns("/*");
         return filterFilterRegistrationBean;
+    }
+
+
+    /**
+     * AOP 모듈 등록
+     */
+    @Bean
+    public AspectPractice getAspectPracticeAop() {
+        return new AspectPractice();
     }
 }
