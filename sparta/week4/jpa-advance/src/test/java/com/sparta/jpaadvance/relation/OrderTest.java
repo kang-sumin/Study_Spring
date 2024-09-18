@@ -61,6 +61,8 @@ public class OrderTest {
         Food food = order.getFood();
         System.out.println("food.getName() = " + food.getName());
         System.out.println("food.getPrice() = " + food.getPrice());
+        System.out.println("order.getOrderDate() = " + order.getOrderDate());
+
     }
 
 }
